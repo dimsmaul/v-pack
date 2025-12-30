@@ -1,3 +1,3 @@
-export function multiply(a: number, b: number): number {
-  return a * b;
-}
+import VButton from './components/VButton';
+
+export { VButton };
