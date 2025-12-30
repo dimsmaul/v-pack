@@ -14,6 +14,7 @@ import {
   VSnackbarProvider,
   useSnackbar,
 } from './components/VSnackbar/VSnackbar';
+import VDrawer from './components/VDrawer/VDrawer';
 
 export {
   // Button
@@ -37,4 +38,7 @@ export {
   // Snackbar
   VSnackbarProvider,
   useSnackbar,
+
+  // Drawer
+  VDrawer,
 };

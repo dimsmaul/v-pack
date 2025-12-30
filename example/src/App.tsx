@@ -6,6 +6,7 @@ import ExampleButton from './example/button';
 import ExampleBanner from './example/banner';
 import { VSnackbarProvider } from 'v-pack';
 import ExampleSnackbar from './example/snackbar';
+import ExampleDrawer from './example/drawer';
 
 export default function App() {
   return (
@@ -24,6 +25,8 @@ export default function App() {
         <ExampleButton />
 
         <ExampleSnackbar />
+
+        <ExampleDrawer />
 
         {/* Bottom spacing */}
         <View style={tw`h-10`} />
