@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import tw from '../../../src/utils/tw';
 import { VButton, VDrawer } from 'v-pack';
 
-const ExampleButton: React.FC = () => {
+const ExampleDrawer: React.FC = () => {
   const [visible, setVisible] = useState(false);
   return (
     <View
@@ -84,4 +84,4 @@ const ExampleButton: React.FC = () => {
   );
 };
 
-export default ExampleButton;
+export default ExampleDrawer;
