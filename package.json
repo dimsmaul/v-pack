@@ -158,6 +158,8 @@
     "version": "0.56.0"
   },
   "dependencies": {
+    "lucide-react-native": "^0.562.0",
+    "react-native-svg": "^15.15.1",
     "twrnc": "^4.15.0"
   }
 }

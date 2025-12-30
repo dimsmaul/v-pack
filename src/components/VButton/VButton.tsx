@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, type PressableProps } from 'react-native';
-import tw from '../utils/tw';
+import tw from '../../utils/tw';
 
 export type VButtonIconProps = {};
 
