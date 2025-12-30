@@ -43,32 +43,26 @@ const VBanner: React.FC<VBannerProps> = ({
     danger: {
       bg: 'bg-danger-50',
       text: 'text-danger-700',
-      icon: '#F14950',
     },
     info: {
       bg: 'bg-info-50',
       text: 'text-info-700',
-      icon: '#5275DF',
     },
     warning: {
       bg: 'bg-warning-50',
       text: 'text-warning-700',
-      icon: '#FFC107',
     },
     success: {
       bg: 'bg-success-50',
       text: 'text-success-700',
-      icon: '#33C78E',
     },
     secondary: {
       bg: 'bg-gray-200',
       text: 'text-gray-800',
-      icon: '#74788D',
     },
     primary: {
       bg: 'bg-primary-50',
       text: 'text-primary-700',
-      icon: '#2C8DA2',
     },
   };
 
@@ -89,7 +83,7 @@ const VBanner: React.FC<VBannerProps> = ({
       {/* Icon */}
       {IconComponent && (
         <View style={tw.style('mr-3 mt-0.5')}>
-          <IconComponent size={20} color={config.icon} />
+          <IconComponent size={20} style={tw.style(config.text)} />
         </View>
       )}
 
