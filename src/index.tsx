@@ -15,6 +15,10 @@ import {
   useSnackbar,
 } from './components/VSnackbar/VSnackbar';
 import VDrawer from './components/VDrawer/VDrawer';
+import VDialog from './components/VDialog/VDialog';
+import VWheelPicker from './components/VPicker/VWheelPicker';
+import VDatePicker from './components/VPicker/VDatePicker';
+import VTimePicker from './components/VPicker/VTimePicker';
 
 export {
   // Button
@@ -41,4 +45,12 @@ export {
 
   // Drawer
   VDrawer,
+
+  // Dialog
+  VDialog,
+
+  // WheelPicker
+  VWheelPicker,
+  VDatePicker,
+  VTimePicker,
 };
