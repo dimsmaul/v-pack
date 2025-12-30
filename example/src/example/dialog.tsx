@@ -1,0 +1,34 @@
+import React, { useState } from 'react';
+import { Text, View } from 'react-native';
+import tw from '../../../src/utils/tw';
+import { VButton, VDialog } from 'v-pack';
+
+const ExampleDialog: React.FC = () => {
+  const [visible, setVisible] = useState(false);
+  return (
+    <View
+      style={tw`m-4 bg-white rounded-xl border border-gray-300 overflow-hidden`}
+    >
+      <Text
+        style={tw`text-lg font-bold p-4 bg-gray-50 border-b border-gray-300`}
+      >
+        Dialog
+      </Text>
+      <View style={tw`p-4 gap-3`}>
+        <VButton onPress={() => setVisible(true)}>Open Dialog</VButton>
+
+        <VDialog
+          visible={visible}
+          onClose={() => setVisible(false)}
+          title="Dialog Title"
+        >
+          <Text style={tw`text-gray-600`}>
+            This is a simple dialog with fade in/out animation.
+          </Text>
+        </VDialog>
+      </View>
+    </View>
+  );
+};
+
+export default ExampleDialog;

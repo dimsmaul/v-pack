@@ -7,6 +7,8 @@ import ExampleBanner from './example/banner';
 import { VSnackbarProvider } from 'v-pack';
 import ExampleSnackbar from './example/snackbar';
 import ExampleDrawer from './example/drawer';
+import ExampleDialog from './example/dialog';
+import ExampleDatePicker from './example/datepicker';
 
 export default function App() {
   return (
@@ -27,6 +29,10 @@ export default function App() {
         <ExampleSnackbar />
 
         <ExampleDrawer />
+
+        <ExampleDialog />
+
+        <ExampleDatePicker />
 
         {/* Bottom spacing */}
         <View style={tw`h-10`} />
