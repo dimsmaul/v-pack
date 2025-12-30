@@ -3,6 +3,7 @@ import tw from 'twrnc';
 import ExampleTabs from './example/tabs';
 import ExampleAccordion from './example/accordion';
 import ExampleButton from './example/button';
+import ExampleBanner from './example/banner';
 
 export default function App() {
   return (
@@ -12,6 +13,10 @@ export default function App() {
 
       {/* Tabs Section */}
       <ExampleTabs />
+
+      {/* Banner Section */}
+      <ExampleBanner />
+
       {/* Button Section */}
       <ExampleButton />
 

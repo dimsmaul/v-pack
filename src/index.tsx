@@ -9,6 +9,7 @@ import VTabs, {
   VTabsTrigger,
   VTabsContent,
 } from './components/VTabs/VTabs';
+import VBanner from './components/VBanner/VBanner';
 
 export {
   VButton,
@@ -20,4 +21,5 @@ export {
   VTabsList,
   VTabsTrigger,
   VTabsContent,
+  VBanner,
 };
