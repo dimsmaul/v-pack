@@ -18,7 +18,7 @@ const ExampleTabs = () => {
         {/* Example 1: 2 Tabs */}
         <View style={tw`mb-6`}>
           <Text style={tw`text-lg font-bold mb-2`}>2 Tabs</Text>
-          <VTabs value={activeTab} onValueChange={setActiveTab}>
+          <VTabs value={activeTab} onValueChange={setActiveTab} variant="pill">
             <VTabsList>
               <VTabsTrigger value="tab1">Tabs 1</VTabsTrigger>
               <VTabsTrigger value="tab2">Tabs 2</VTabsTrigger>

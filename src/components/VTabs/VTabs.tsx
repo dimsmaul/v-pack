@@ -148,7 +148,8 @@ export const VTabsTrigger: React.FC<VTabsTriggerProps> = ({
         <Text
           style={tw.style(
             'text-base font-medium',
-            isActive ? 'text-primary-500' : 'text-gray-400'
+            isActive ? 'text-primary-500' : 'text-gray-400',
+            variant === 'pill' && 'text-sm py-1'
           )}
         >
           {children}
