@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import tw from '../../../src/utils/tw';
-import { VButton, VDatePicker, VDialog, VDrawer, VTimePicker } from 'v-pack';
+import {
+  VButton,
+  VDatePicker,
+  VDatePickerInput,
+  VDialog,
+  VDrawer,
+  VTimePicker,
+} from 'v-pack';
 
 const ExampleDatePicker: React.FC = () => {
   const [date, setDate] = useState(new Date());
@@ -11,7 +18,7 @@ const ExampleDatePicker: React.FC = () => {
   const [time, setTime] = useState(new Date());
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [showTimePickerDrawer, setShowTimePickerDrawer] = useState(false);
-
+  const [selectedDate, setSelectedDate] = useState(new Date());
   return (
     <View
       style={tw`m-4 bg-white rounded-xl border border-gray-300 overflow-hidden`}
@@ -141,69 +148,12 @@ const ExampleDatePicker: React.FC = () => {
           </VDrawer>
         </View>
 
-        {/* <VButton onPress={() => setVisible(true)}>Open Drawer</VButton>
-
-        <VDrawer
-          visible={visible}
-          onClose={() => setVisible(false)}
-          title="Choose your team"
-          bottomAction={
-            <VButton
-              type="primary"
-              onPress={() => {
-                console.log('OK pressed');
-                setVisible(false);
-              }}
-            >
-              Oke
-            </VButton>
-          }
-        >
-          <View>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Barcelona
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Manchaster United
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Real Madrid
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Juventus
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Ajax
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Liverpool
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Chelsea
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Arsenal
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Barcelona
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Manchaster United
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Real Madrid
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Juventus
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Ajax
-            </Text>
-            <Text style={tw`py-4 text-base border-b border-gray-200`}>
-              Liverpool
-            </Text>
-          </View>
-        </VDrawer> */}
+        <VDatePickerInput
+          value={selectedDate}
+          onValueChange={setSelectedDate}
+          minimumDate={new Date('2025-12-20')}
+          maximumDate={new Date('2026-01-10')}
+        />
       </View>
     </View>
   );

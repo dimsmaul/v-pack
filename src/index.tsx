@@ -83,6 +83,10 @@ export {
   VTextarea,
 };
 
+// src/components/VDatePickerInput/index.ts
+export { default as VDatePickerInput } from './components/VForm/VDatePickerInput';
+export type { VDatePickerInputProps } from './components/VForm/VDatePickerInput';
+
 // src/components/VForm/VCheckbox
 export { default as VCheckbox } from './components/VForm/VCheckbox';
 export type { VCheckboxProps } from './components/VForm/VCheckbox';
@@ -106,3 +110,9 @@ export type { VBadgeProps } from './components/VBadge/VBadge';
 // src/components/VTooltip/index.ts
 export { default as VTooltip } from './components/VTooltip/VTooltip';
 export type { VTooltipProps } from './components/VTooltip/VTooltip';
+
+export { default as VCalendar } from './components/VPicker/VCalendar';
+export type { VCalendarProps } from './components/VPicker/VCalendar';
+
+export { default as VCalendarRange } from './components/VPicker/VCalendarRange';
+export type { VCalendarRangeProps } from './components/VPicker/VCalendarRange';

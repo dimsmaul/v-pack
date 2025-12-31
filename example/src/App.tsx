@@ -14,6 +14,8 @@ import ExampleCheckbox from './example/checkbox';
 import ExampleQuantity from './example/quantity';
 import ExampleBadge from './example/badge';
 import ExampleTooltip from './example/tooltip';
+import ExampleCalendar from './example/calendar';
+import ExampleCalendarRange from './example/calendar-range';
 
 export default function App() {
   useDeviceContext(tw);
@@ -32,6 +34,8 @@ export default function App() {
             <ExampleSnackbar />
 
             <ExampleCheckbox />
+            <ExampleCalendar />
+            <ExampleCalendarRange />
           </View>
           <View style={tw`md:w-1/2 w-full`}>
             {/* Accordion Section */}

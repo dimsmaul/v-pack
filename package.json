@@ -159,6 +159,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "dayjs": "^1.11.19",
     "lucide-react-native": "^0.562.0",
     "react-hook-form": "^7.69.0",
     "react-native-svg": "^15.15.1",
