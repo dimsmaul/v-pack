@@ -34,7 +34,7 @@ type FormValues = z.infer<typeof formSchema>;
 function ExampleForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
-    mode: 'onSubmit',
+    mode: 'onBlur',
     // reValidateMode: 'onSubmit',
     defaultValues: {
       username: '',
