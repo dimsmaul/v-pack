@@ -1,5 +1,5 @@
 /**
- * FIXME: This is a temporary implementation of VTooltip for React Native.
+ * FIXME: This component still can't run properly
  */
 
 // src/components/VTooltip/VTooltip.tsx

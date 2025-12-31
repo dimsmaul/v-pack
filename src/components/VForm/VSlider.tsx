@@ -1,3 +1,7 @@
+/**
+ * FIXME: This component still can't run properly
+ */
+
 // src/components/VSlider/VSlider.tsx
 import React, { forwardRef, useState, useRef, useCallback } from 'react';
 import {
