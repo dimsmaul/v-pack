@@ -82,3 +82,23 @@ export {
   // Textarea
   VTextarea,
 };
+
+// src/components/VForm/VCheckbox
+export { default as VCheckbox } from './components/VForm/VCheckbox';
+export type { VCheckboxProps } from './components/VForm/VCheckbox';
+
+// src/components/VForm/VToggle
+export { default as VToggle } from './components/VForm/VToggle';
+export type { VToggleProps } from './components/VForm/VToggle';
+
+// src/components/VForm/VSlider
+export { default as VSlider } from './components/VForm/VSlider';
+export type { VSliderProps } from './components/VForm/VSlider';
+
+// src/components/VForm/VQuantityInput
+export { default as VQuantityInput } from './components/VForm/VQuantityInput';
+export type { VQuantityInputProps } from './components/VForm/VQuantityInput';
+
+// src/components/VBadge/index.ts
+export { default as VBadge } from './components/VBadge/VBadge';
+export type { VBadgeProps } from './components/VBadge/VBadge';

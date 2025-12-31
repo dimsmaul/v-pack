@@ -10,6 +10,9 @@ import ExampleDrawer from './example/drawer';
 import ExampleDialog from './example/dialog';
 import ExampleDatePicker from './example/datepicker';
 import ExampleForm from './example/input';
+import ExampleCheckbox from './example/checkbox';
+import ExampleQuantity from './example/quantity';
+import ExampleBadge from './example/badge';
 
 export default function App() {
   useDeviceContext(tw);
@@ -26,6 +29,8 @@ export default function App() {
             <ExampleBanner />
 
             <ExampleSnackbar />
+
+            <ExampleCheckbox />
           </View>
           <View style={tw`md:w-1/2 w-full`}>
             {/* Accordion Section */}
@@ -40,6 +45,8 @@ export default function App() {
             <ExampleDrawer />
             <ExampleDialog />
             <ExampleDatePicker />
+            <ExampleQuantity />
+            <ExampleBadge />
           </View>
         </View>
 
