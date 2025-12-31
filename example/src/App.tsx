@@ -9,11 +9,14 @@ import ExampleSnackbar from './example/snackbar';
 import ExampleDrawer from './example/drawer';
 import ExampleDialog from './example/dialog';
 import ExampleDatePicker from './example/datepicker';
+import ExampleForm from './example/input';
 
 export default function App() {
   return (
     <VSnackbarProvider>
       <ScrollView style={tw`flex-1 bg-gray-100`}>
+        <ExampleForm />
+
         {/* Accordion Section */}
         <ExampleAccordion />
 

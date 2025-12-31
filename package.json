@@ -158,8 +158,11 @@
     "version": "0.56.0"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
     "lucide-react-native": "^0.562.0",
+    "react-hook-form": "^7.69.0",
     "react-native-svg": "^15.15.1",
-    "twrnc": "^4.15.0"
+    "twrnc": "^4.15.0",
+    "zod": "^4.2.1"
   }
 }

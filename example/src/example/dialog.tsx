@@ -23,7 +23,11 @@ const ExampleDialog: React.FC = () => {
           title="Dialog Title"
         >
           <Text style={tw`text-gray-600`}>
-            This is a simple dialog with fade in/out animation.
+            This is a simple dialog with fade in/out animation. Lorem ipsum,
+            dolor sit amet consectetur adipisicing elit. Temporibus placeat
+            possimus aliquam necessitatibus voluptatem numquam consectetur nulla
+            facere, praesentium voluptates dolores ratione aspernatur asperiores
+            dolorum quasi sit incidunt hic earum.
           </Text>
         </VDialog>
       </View>

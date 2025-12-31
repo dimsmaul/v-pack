@@ -19,6 +19,17 @@ import VDialog from './components/VDialog/VDialog';
 import VWheelPicker from './components/VPicker/VWheelPicker';
 import VDatePicker from './components/VPicker/VDatePicker';
 import VTimePicker from './components/VPicker/VTimePicker';
+import VInput from './components/VForm/VInput';
+import VTextarea from './components/VForm/VTextArea';
+import {
+  VForm,
+  VFormField,
+  VFormItem,
+  VFormLabel,
+  VFormControl,
+  VFormDescription,
+  VFormMessage,
+} from './components/VForm/VForm';
 
 export {
   // Button
@@ -53,4 +64,19 @@ export {
   VWheelPicker,
   VDatePicker,
   VTimePicker,
+
+  // Form
+  VForm,
+  VFormField,
+  VFormItem,
+  VFormLabel,
+  VFormControl,
+  VFormDescription,
+  VFormMessage,
+
+  // Input
+  VInput,
+
+  // Textarea
+  VTextarea,
 };
