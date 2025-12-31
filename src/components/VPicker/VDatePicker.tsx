@@ -62,7 +62,7 @@ const VDatePicker: React.FC<VDatePickerProps> = ({
     onValueChange(newDate);
   };
 
-  const handleMonthChange = (month: string | number, index: number) => {
+  const handleMonthChange = (_month: string | number, index: number) => {
     setSelectedMonth(index);
     // Adjust day if it exceeds the new month's days
     const daysInNewMonth = new Date(selectedYear, index + 1, 0).getDate();
