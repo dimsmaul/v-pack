@@ -1,5 +1,5 @@
 import { ScrollView, View } from 'react-native';
-import tw from 'twrnc';
+import tw, { useDeviceContext } from 'twrnc';
 import ExampleTabs from './example/tabs';
 import ExampleAccordion from './example/accordion';
 import ExampleButton from './example/button';
@@ -12,30 +12,36 @@ import ExampleDatePicker from './example/datepicker';
 import ExampleForm from './example/input';
 
 export default function App() {
+  useDeviceContext(tw);
   return (
     <VSnackbarProvider>
       <ScrollView style={tw`flex-1 bg-gray-100`}>
-        <ExampleForm />
+        <View
+          style={tw`md:flex-row md:flex-wrap flex flex-col justify-center items-start pt-6`}
+        >
+          <View style={tw`md:w-1/2 w-full`}>
+            <ExampleForm />
 
-        {/* Accordion Section */}
-        <ExampleAccordion />
+            {/* Banner Section */}
+            <ExampleBanner />
 
-        {/* Tabs Section */}
-        <ExampleTabs />
+            <ExampleSnackbar />
+          </View>
+          <View style={tw`md:w-1/2 w-full`}>
+            {/* Accordion Section */}
+            <ExampleAccordion />
 
-        {/* Banner Section */}
-        <ExampleBanner />
+            {/* Tabs Section */}
+            <ExampleTabs />
 
-        {/* Button Section */}
-        <ExampleButton />
+            {/* Button Section */}
+            <ExampleButton />
 
-        <ExampleSnackbar />
-
-        <ExampleDrawer />
-
-        <ExampleDialog />
-
-        <ExampleDatePicker />
+            <ExampleDrawer />
+            <ExampleDialog />
+            <ExampleDatePicker />
+          </View>
+        </View>
 
         {/* Bottom spacing */}
         <View style={tw`h-10`} />
