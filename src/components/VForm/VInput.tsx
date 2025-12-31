@@ -56,6 +56,7 @@ const VInput = forwardRef<any, VInputProps>(
               margin: 0,
               height: '100%',
               textAlignVertical: 'center',
+              outlineWidth: 0,
               ...(Platform.OS === 'ios' && {
                 lineHeight: 20,
               }),
