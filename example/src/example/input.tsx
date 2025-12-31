@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -14,6 +13,7 @@ import {
   VInput,
   VTextarea,
   VButton,
+  VPasswordInput,
 } from 'v-pack';
 import { Mail, Lock, User, X, Eye, EyeOff } from 'lucide-react-native';
 import tw from 'twrnc';
@@ -32,10 +32,10 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 function ExampleForm() {
-  const [showPassword, setShowPassword] = useState(false);
-
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
+    mode: 'onBlur',
+    reValidateMode: 'onSubmit',
     defaultValues: {
       username: '',
       email: '',
@@ -124,25 +124,16 @@ function ExampleForm() {
                 <VFormItem>
                   <VFormLabel>Password</VFormLabel>
                   <VFormControl>
-                    <VInput
-                      key={`password-${showPassword}`}
+                    <VPasswordInput
                       placeholder="Enter password"
                       variant="outline"
                       prefix={<Lock size={20} color="#6b7280" />}
-                      suffix={
-                        <Pressable
-                          onPress={() => setShowPassword(!showPassword)}
-                        >
-                          {showPassword ? (
-                            <EyeOff size={20} color="#6b7280" />
-                          ) : (
-                            <Eye size={20} color="#6b7280" />
-                          )}
-                        </Pressable>
-                      }
-                      secureTextEntry={!showPassword}
-                      {...field}
+                      IconShow={Eye}
+                      IconHide={EyeOff}
+                      iconColor="#6b7280"
+                      value={field.value}
                       onChangeText={field.onChange}
+                      onBlur={field.onBlur}
                     />
                   </VFormControl>
                   <VFormMessage />
@@ -203,8 +194,7 @@ function ExampleForm() {
             <VButton
               type="primary"
               onPress={() => form.handleSubmit(onSubmit)}
-              //   onPress={form.handleSubmit(onSubmit)}
-              disabled={!form.formState.isValid}
+              // disabled={!form.formState.isValid}
             >
               Submit
             </VButton>

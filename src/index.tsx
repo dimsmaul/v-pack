@@ -20,6 +20,7 @@ import VWheelPicker from './components/VPicker/VWheelPicker';
 import VDatePicker from './components/VPicker/VDatePicker';
 import VTimePicker from './components/VPicker/VTimePicker';
 import VInput from './components/VForm/VInput';
+import VPasswordInput from './components/VForm/VPasswordInput';
 import VTextarea from './components/VForm/VTextArea';
 import {
   VForm,
@@ -76,6 +77,7 @@ export {
 
   // Input
   VInput,
+  VPasswordInput,
 
   // Textarea
   VTextarea,
