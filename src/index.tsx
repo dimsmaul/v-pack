@@ -102,3 +102,7 @@ export type { VQuantityInputProps } from './components/VForm/VQuantityInput';
 // src/components/VBadge/index.ts
 export { default as VBadge } from './components/VBadge/VBadge';
 export type { VBadgeProps } from './components/VBadge/VBadge';
+
+// src/components/VTooltip/index.ts
+export { default as VTooltip } from './components/VTooltip/VTooltip';
+export type { VTooltipProps } from './components/VTooltip/VTooltip';

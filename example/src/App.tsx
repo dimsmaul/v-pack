@@ -13,6 +13,7 @@ import ExampleForm from './example/input';
 import ExampleCheckbox from './example/checkbox';
 import ExampleQuantity from './example/quantity';
 import ExampleBadge from './example/badge';
+import ExampleTooltip from './example/tooltip';
 
 export default function App() {
   useDeviceContext(tw);
@@ -47,6 +48,7 @@ export default function App() {
             <ExampleDatePicker />
             <ExampleQuantity />
             <ExampleBadge />
+            <ExampleTooltip />
           </View>
         </View>
 
