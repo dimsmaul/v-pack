@@ -6,7 +6,7 @@ import isBetween from 'dayjs/plugin/isBetween';
 import localeData from 'dayjs/plugin/localeData';
 import 'dayjs/locale/id';
 import tw from '../../utils/tw';
-import { ChevronLeft, ChevronRight } from 'lucide-react-native';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react-native';
 
 dayjs.extend(isBetween);
 dayjs.extend(localeData);
@@ -269,7 +269,7 @@ const VCalendarRange: React.FC<VCalendarRangeProps> = ({
 
             {endDate && (
               <>
-                <Text style={tw`text-primary-400 mx-2`}>→</Text>
+                <ArrowRight style={tw`text-primary-400 mx-2`} />
                 <View style={tw`flex-1`}>
                   <Text style={tw`text-xs text-secondary-600 mb-1`}>
                     Sampai

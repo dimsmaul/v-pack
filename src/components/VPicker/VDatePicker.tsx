@@ -1,3 +1,7 @@
+/**
+ * FIXME: the minimum date and maximum date properties still don't work as they should
+ */
+
 // src / components / VPicker / VDatePicker.tsx;
 import React, { useState, useMemo } from 'react';
 import { View } from 'react-native';
