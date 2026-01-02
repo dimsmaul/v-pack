@@ -15,7 +15,7 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VTooltipProps extends Omit<ViewProps, 'children'> {
   children: React.ReactNode;
@@ -42,6 +42,7 @@ const VTooltip = forwardRef<View, VTooltipProps>(
     },
     ref
   ) => {
+    const { tw } = useTheme();
     const [visible, setVisible] = useState(false);
     const [triggerLayout, setTriggerLayout] = useState({
       x: 0,
