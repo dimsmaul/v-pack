@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
-import { VCheckbox, VSlider, VToggle } from 'v-pack';
+import { useTheme, VCheckbox, VSlider, VToggle } from 'v-pack';
 
 const ExampleCheckbox: React.FC = () => {
+  const { tw } = useTheme();
   const [checked, setChecked] = useState(false);
   const [toggled, setToggled] = useState(false);
   const [sliderValue, setSliderValue] = useState(0);

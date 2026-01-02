@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
-import { VQuantityInput } from 'v-pack';
+import { useTheme, VQuantityInput } from 'v-pack';
 
 const ExampleQuantity: React.FC = () => {
+  const { tw } = useTheme();
   const [quantity, setQuantity] = React.useState(1);
   const itemId = 'item-123';
   const [qty, setQty] = React.useState(1);

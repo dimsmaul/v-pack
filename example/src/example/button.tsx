@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
-import { VButton } from 'v-pack';
+import { useTheme, VButton } from 'v-pack';
 
 const ExampleButton: React.FC = () => {
+  const { tw } = useTheme();
   return (
     <View
       style={tw`m-4 bg-white rounded-xl border border-gray-300 overflow-hidden`}

@@ -58,6 +58,22 @@ const ExampleAvatar: React.FC = () => {
             <VAvatar src="https://i.pravatar.cc/150?img=5" size="md" />
           </VAvatarGroup>
         </View>
+
+        <View>
+          {/* Rounded (Circle) */}
+          <View style={{ flexDirection: 'row', gap: 16, marginBottom: 16 }}>
+            <VAvatar fallback="DM" variant="rounded" size="sm" />
+            <VAvatar fallback="DM" variant="rounded" size="md" />
+            <VAvatar fallback="DM" variant="rounded" size="lg" />
+          </View>
+
+          {/* Square */}
+          <View style={{ flexDirection: 'row', gap: 16 }}>
+            <VAvatar fallback="DM" variant="square" size="sm" />
+            <VAvatar fallback="DM" variant="square" size="md" />
+            <VAvatar fallback="DM" variant="square" size="lg" />
+          </View>
+        </View>
       </View>
     </View>
   );

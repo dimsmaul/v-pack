@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
-import { VCalendarRange } from 'v-pack';
+import { useTheme, VCalendarRange } from 'v-pack';
 import dayjs from 'dayjs';
 
 const ExampleCalendarRange: React.FC = () => {
+  const { tw } = useTheme();
   const [dateRange, setDateRange] = useState<{
     startDate: Date | null;
     endDate: Date | null;

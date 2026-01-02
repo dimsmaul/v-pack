@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
 import {
+  useTheme,
   VButton,
   VDatePicker,
   VDatePickerInput,
@@ -11,6 +11,7 @@ import {
 } from 'v-pack';
 
 const ExampleDatePicker: React.FC = () => {
+  const { tw } = useTheme();
   const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
   const [showPickerDrawer, setShowPickerDrawer] = useState(false);

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
-import { VTooltip } from 'v-pack';
+import { useTheme, VTooltip } from 'v-pack';
 import { Info } from 'lucide-react-native';
 
 const ExampleTooltip: React.FC = () => {
+  const { tw } = useTheme();
   return (
     <View
       style={tw`m-4 bg-white rounded-xl border border-gray-300 overflow-hidden`}

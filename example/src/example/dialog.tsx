@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
-import { VButton, VDialog } from 'v-pack';
+import { useTheme, VButton, VDialog } from 'v-pack';
 
 const ExampleDialog: React.FC = () => {
+  const { tw } = useTheme();
   const [visible, setVisible] = useState(false);
   return (
     <View

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Text, View } from 'react-native';
-import { VTabs, VTabsContent, VTabsList, VTabsTrigger } from 'v-pack';
-import tw from '../../../src/utils/tw';
+import { useTheme, VTabs, VTabsContent, VTabsList, VTabsTrigger } from 'v-pack';
 
 const ExampleTabs = () => {
+  const { tw } = useTheme();
   const [activeTab, setActiveTab] = useState('tab1');
   return (
     <View

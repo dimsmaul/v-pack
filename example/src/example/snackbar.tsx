@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
-import { useSnackbar, VButton } from 'v-pack';
+import { useSnackbar, useTheme, VButton } from 'v-pack';
 import { CheckCircle } from 'lucide-react-native';
 
 const ExampleSnackbar: React.FC = () => {
   const snackbar = useSnackbar();
+  const { tw } = useTheme();
   return (
     <View
       style={tw`m-4 bg-white rounded-xl border border-gray-300 overflow-hidden`}

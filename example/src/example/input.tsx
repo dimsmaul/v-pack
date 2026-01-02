@@ -14,9 +14,9 @@ import {
   VTextarea,
   VButton,
   VPasswordInput,
+  useTheme,
 } from 'v-pack';
 import { Mail, Lock, User, X, Eye, EyeOff } from 'lucide-react-native';
-import tw from 'twrnc';
 
 // Schema validation
 const formSchema = z.object({
@@ -32,6 +32,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 function ExampleForm() {
+  const { tw } = useTheme();
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     mode: 'onBlur',

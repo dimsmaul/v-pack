@@ -1,9 +1,9 @@
 import { Text, View } from 'react-native';
-import { VBanner } from 'v-pack';
-import tw from '../../../src/utils/tw';
+import { useTheme, VBanner } from 'v-pack';
 import { Truck } from 'lucide-react-native';
 
 const ExampleBanner = () => {
+  const { tw } = useTheme();
   return (
     <View
       style={tw`m-4 bg-white rounded-xl border border-gray-300 overflow-hidden`}

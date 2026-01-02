@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
-import { VCalendar } from 'v-pack';
+import { useTheme, VCalendar } from 'v-pack';
 
 const ExampleCalendar: React.FC = () => {
+  const { tw } = useTheme();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [selectedDate1, setSelectedDate1] = useState<Date>(new Date());
   return (
