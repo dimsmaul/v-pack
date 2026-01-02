@@ -122,3 +122,21 @@ export type { VCalendarRangeProps } from './components/VPicker/VCalendarRange';
 // src/components/VPackProvider/index.ts
 export { default as VPackProvider } from './components/VPackProvider/VPackProvider';
 export type { VPackProviderProps } from './components/VPackProvider/VPackProvider';
+
+// src/components/VAvatar/index.ts
+export {
+  VAvatar,
+  type VAvatarProps,
+  type AvatarSize,
+  type AvatarVariant,
+} from './components/VAvatar/VAvatar';
+export {
+  VAvatarGroup,
+  type VAvatarGroupProps,
+} from './components/VAvatar/VGroupAvatar';
+
+/**
+ * Theme Provider
+ */
+
+export { ThemeProvider, useTheme } from './theme/ThemeProvider';

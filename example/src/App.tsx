@@ -16,6 +16,7 @@ import ExampleBadge from './example/badge';
 import ExampleTooltip from './example/tooltip';
 import ExampleCalendar from './example/calendar';
 import ExampleCalendarRange from './example/calendar-range';
+import ExampleAvatar from './example/avatar';
 
 const theme = require('./../tailwind.config.js');
 
@@ -55,6 +56,7 @@ export default function App() {
             <ExampleQuantity />
             <ExampleBadge />
             <ExampleTooltip />
+            <ExampleAvatar />
           </View>
         </View>
 

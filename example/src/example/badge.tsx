@@ -1,10 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
-import { VBadge } from 'v-pack';
+import { useTheme, VBadge } from 'v-pack';
 import { Bell, Mail, ShoppingCart } from 'lucide-react-native';
 
 const ExampleBadge: React.FC = () => {
+  const { tw } = useTheme();
+
   return (
     <View
       style={tw`m-4 bg-white rounded-xl border border-gray-300 overflow-hidden`}

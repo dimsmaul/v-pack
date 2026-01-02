@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import tw from '../../../src/utils/tw';
 import {
+  useTheme,
   VAccordion,
   VAccordionContent,
   VAccordionItem,
@@ -9,6 +9,7 @@ import {
 } from 'v-pack';
 
 const ExampleAccordion: React.FC = () => {
+  const { tw } = useTheme();
   return (
     <View
       style={tw`m-4 bg-white rounded-xl border border-gray-300 overflow-hidden`}
