@@ -122,3 +122,18 @@ export type { VCalendarRangeProps } from './components/VPicker/VCalendarRange';
 // src/components/VPackProvider/index.ts
 export { default as VPackProvider } from './components/VPackProvider/VPackProvider';
 export type { VPackProviderProps } from './components/VPackProvider/VPackProvider';
+
+export { useToolbar } from './components/VToolbar/hooks/useToolbar';
+export type {
+  ToolbarConfig,
+  ToolbarRightAction,
+  ToolbarMenuItem,
+} from './components/VToolbar/ToolbarContext';
+
+// ✅ Export navigation types
+export type { VPackNavigation } from './types/navigation';
+
+export { isExpoRouter, isReactNavigation } from './types/navigation';
+
+// ✅ Re-export Router from expo-router
+export type { Router } from 'expo-router';
