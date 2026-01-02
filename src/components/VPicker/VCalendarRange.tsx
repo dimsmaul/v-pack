@@ -5,8 +5,8 @@ import dayjs, { Dayjs } from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
 import localeData from 'dayjs/plugin/localeData';
 import 'dayjs/locale/id';
-import tw from '../../utils/tw';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react-native';
+import { useTheme } from '../../theme/ThemeProvider';
 
 dayjs.extend(isBetween);
 dayjs.extend(localeData);
@@ -31,6 +31,7 @@ const VCalendarRange: React.FC<VCalendarRangeProps> = ({
   maxDate,
   singleMonthView = false,
 }) => {
+  const { tw } = useTheme();
   const [currentDate, setCurrentDate] = useState<Dayjs>(
     dayjs(startDate || new Date())
   );

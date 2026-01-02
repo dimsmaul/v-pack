@@ -7,7 +7,7 @@ import {
   type NativeScrollEvent,
   type NativeSyntheticEvent,
 } from 'react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const ITEM_HEIGHT = 44;
 
@@ -26,6 +26,7 @@ const VWheelPicker: React.FC<VWheelPickerProps> = ({
   style,
   loop = false,
 }) => {
+  const { tw } = useTheme();
   const flatListRef = useRef<FlatList>(null);
   const isScrollingRef = useRef(false);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);

@@ -6,7 +6,7 @@
 import React, { useState, useMemo } from 'react';
 import { View } from 'react-native';
 import VWheelPicker from './VWheelPicker';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const ITEM_HEIGHT = 44;
 
@@ -23,6 +23,7 @@ const VDatePicker: React.FC<VDatePickerProps> = ({
   minimumDate,
   maximumDate,
 }) => {
+  const { tw } = useTheme();
   const [selectedDay, setSelectedDay] = useState(value.getDate());
   const [selectedMonth, setSelectedMonth] = useState(value.getMonth());
   const [selectedYear, setSelectedYear] = useState(value.getFullYear());
