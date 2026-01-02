@@ -115,9 +115,21 @@ export type { VTooltipProps } from './components/VTooltip/VTooltip';
 export { default as VCalendar } from './components/VPicker/VCalendar';
 export type { VCalendarProps } from './components/VPicker/VCalendar';
 
+// src/components/VCalendarPickerInput/index.ts
+export {
+  default as VCalendarPickerInput,
+  type VCalendarPickerInputProps,
+} from './components/VForm/VCalendarPickerInput';
+
 // src/components/VCalendarRange/index.ts
 export { default as VCalendarRange } from './components/VPicker/VCalendarRange';
 export type { VCalendarRangeProps } from './components/VPicker/VCalendarRange';
+
+// src/components/VCalendarRangePickerInput/index.ts
+export {
+  default as VCalendarRangePickerInput,
+  type VCalendarRangePickerInputProps,
+} from './components/VForm/VCalendarRangePickerInput';
 
 // src/components/VPackProvider/index.ts
 export { default as VPackProvider } from './components/VPackProvider/VPackProvider';

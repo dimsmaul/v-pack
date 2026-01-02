@@ -33,7 +33,6 @@ const ExampleCalendar: React.FC = () => {
           maxDate={new Date('2026-01-10')}
         />
         <Text>Selected date: {selectedDate1.toDateString()}</Text>
-        {/* TODO: Replace with an actual calendar component like react-native-calendars */}
       </View>
     </View>
   );
