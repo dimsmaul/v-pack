@@ -111,8 +111,14 @@ export type { VBadgeProps } from './components/VBadge/VBadge';
 export { default as VTooltip } from './components/VTooltip/VTooltip';
 export type { VTooltipProps } from './components/VTooltip/VTooltip';
 
+// src/components/VCalendar/index.ts
 export { default as VCalendar } from './components/VPicker/VCalendar';
 export type { VCalendarProps } from './components/VPicker/VCalendar';
 
+// src/components/VCalendarRange/index.ts
 export { default as VCalendarRange } from './components/VPicker/VCalendarRange';
 export type { VCalendarRangeProps } from './components/VPicker/VCalendarRange';
+
+// src/components/VPackProvider/index.ts
+export { default as VPackProvider } from './components/VPackProvider/VPackProvider';
+export type { VPackProviderProps } from './components/VPackProvider/VPackProvider';
