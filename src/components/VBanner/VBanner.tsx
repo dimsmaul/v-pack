@@ -9,7 +9,7 @@ import {
   Bell,
 } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VBannerProps extends ViewProps {
   type?: 'danger' | 'info' | 'warning' | 'success' | 'secondary' | 'primary';
@@ -28,6 +28,7 @@ const VBanner: React.FC<VBannerProps> = ({
   style,
   ...props
 }) => {
+  const { tw } = useTheme();
   // Default icons per type
   const defaultIcons: Record<string, LucideIcon> = {
     danger: AlertCircle,
