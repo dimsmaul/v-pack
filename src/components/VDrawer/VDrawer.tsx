@@ -12,7 +12,7 @@ import {
   type ViewProps,
 } from 'react-native';
 import { X } from 'lucide-react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -43,6 +43,7 @@ const VDrawer: React.FC<VDrawerProps> = ({
   style,
   ...props
 }) => {
+  const { tw } = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
   const translateY = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
   const backdropOpacity = useRef(new Animated.Value(0)).current;
