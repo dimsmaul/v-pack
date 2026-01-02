@@ -7,7 +7,7 @@ import {
   type PressableProps,
   type ViewStyle,
 } from 'react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VToggleProps extends Omit<PressableProps, 'onPress'> {
   checked?: boolean;
@@ -36,6 +36,7 @@ const VToggle = forwardRef<View, VToggleProps>(
     },
     ref
   ) => {
+    const { tw } = useTheme();
     const { width, height, thumb, translate } = sizeConfig[size];
     const animation = useRef(new Animated.Value(checked ? 1 : 0)).current;
 

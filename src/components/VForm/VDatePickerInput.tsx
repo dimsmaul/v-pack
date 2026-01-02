@@ -5,9 +5,9 @@ import { Calendar } from 'lucide-react-native';
 import VDrawer from '../VDrawer/VDrawer';
 import VButton from '../VButton/VButton';
 import VDatePicker from '../VPicker/VDatePicker';
-import tw from '../../utils/tw';
 import type { VInputProps } from './VInput';
 import VInput from './VInput';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VDatePickerInputProps
   extends Omit<VInputProps, 'value' | 'onChangeText'> {
@@ -38,6 +38,7 @@ const VDatePickerInput = forwardRef<any, VDatePickerInputProps>(
     },
     ref
   ) => {
+    const { tw } = useTheme();
     const [isDrawerVisible, setIsDrawerVisible] = useState(false);
     const [tempDate, setTempDate] = useState(value);
 
