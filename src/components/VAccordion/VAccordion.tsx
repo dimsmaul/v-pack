@@ -9,7 +9,7 @@ import {
   type ViewProps,
 } from 'react-native';
 import { ChevronDown } from 'lucide-react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 // Context untuk share state antara Trigger dan Content
 interface AccordionItemContextValue {
@@ -66,6 +66,7 @@ export const VAccordionItem: React.FC<VAccordionItemProps> = ({
   disabled = false,
   duration = 200,
 }) => {
+  const { tw } = useTheme();
   const [open, setOpen] = useState(isOpen);
   const [contentHeight, setContentHeight] = useState(0);
   const animatedHeight = useRef(new Animated.Value(0)).current;
@@ -153,6 +154,7 @@ export const VAccordionTrigger: React.FC<VAccordionTriggerProps> = ({
   style,
   ...props
 }) => {
+  const { tw } = useTheme();
   const { toggle, disabled, animatedRotation } = useAccordionItem();
 
   const rotation = animatedRotation.interpolate({
@@ -187,6 +189,7 @@ export const VAccordionContent: React.FC<VAccordionContentProps> = ({
   style,
   ...props
 }) => {
+  const { tw } = useTheme();
   const { animatedHeight, setContentHeight, open } = useAccordionItem();
   const isFirstMeasure = useRef(true);
 
@@ -221,6 +224,7 @@ const VAccordion: React.FC<VAccordionProps> = ({
   type = 'single',
   children,
 }) => {
+  const { tw } = useTheme();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const renderChildren = () => {

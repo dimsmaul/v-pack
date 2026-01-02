@@ -4,7 +4,7 @@
 
 import React, { forwardRef, useState } from 'react';
 import { View, TextInput, type TextInputProps } from 'react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VTextareaProps extends TextInputProps {
   variant?: 'outline' | 'underline';
@@ -31,6 +31,7 @@ const VTextarea = forwardRef<any, VTextareaProps>(
     },
     ref
   ) => {
+    const { tw } = useTheme();
     const [isFocused, setIsFocused] = useState(false);
     const minHeight = rows * 24;
     const [height, setHeight] = useState(minHeight);

@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState, useCallback } from 'react';
 import { View, Text, Animated, Pressable, SafeAreaView } from 'react-native';
 import { X } from 'lucide-react-native';
 import type { LucideIcon } from 'lucide-react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface SnackbarOptions {
   message: string;
@@ -35,6 +35,7 @@ export const useSnackbar = () => {
 export const VSnackbarProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { tw } = useTheme();
   const [snackbar, setSnackbar] = useState<SnackbarOptions | null>(null);
   const translateY = React.useRef(new Animated.Value(100)).current;
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);

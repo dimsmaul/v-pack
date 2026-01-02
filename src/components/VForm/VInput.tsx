@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from 'react';
 import { View, TextInput, Platform, type TextInputProps } from 'react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VInputProps extends TextInputProps {
   variant?: 'outline' | 'underline';
@@ -14,6 +14,7 @@ const VInput = forwardRef<any, VInputProps>(
     { variant = 'outline', prefix, suffix, error = false, style, ...props },
     ref
   ) => {
+    const { tw } = useTheme();
     const [isFocused, setIsFocused] = useState(false);
     const isOutline = variant === 'outline';
 

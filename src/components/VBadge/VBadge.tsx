@@ -1,7 +1,7 @@
 // src/components/VBadge/VBadge.tsx
 import React, { forwardRef } from 'react';
 import { View, Text, type ViewProps, type ViewStyle } from 'react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VBadgeProps extends Omit<ViewProps, 'children'> {
   children?: React.ReactNode;
@@ -64,6 +64,7 @@ const VBadge = forwardRef<View, VBadgeProps>(
     },
     ref
   ) => {
+    const { tw } = useTheme();
     const sizeConfig = sizeMap[size];
     const variantColor = variantMap[variant];
 

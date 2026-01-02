@@ -2,7 +2,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { View } from 'react-native';
 import VWheelPicker from './VWheelPicker';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 const ITEM_HEIGHT = 44;
 
@@ -21,6 +21,7 @@ const VTimePicker: React.FC<VTimePickerProps> = ({
   showSeconds = false,
   loop = true, // Default true untuk loop
 }) => {
+  const { tw } = useTheme();
   const [selectedHour, setSelectedHour] = useState(
     mode === '12h' ? value.getHours() % 12 || 12 : value.getHours()
   );

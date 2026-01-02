@@ -1,7 +1,6 @@
 import React from 'react';
 import { Pressable, Text, type PressableProps } from 'react-native';
-import tw from '../../utils/tw';
-
+import { useTheme } from '../../theme/ThemeProvider';
 export type VButtonIconProps = {};
 
 export type VButtonProps = PressableProps & {
@@ -21,6 +20,7 @@ const VButton: React.FC<VButtonProps> = ({
   children,
   ...props
 }) => {
+  const { tw } = useTheme();
   // Base styles
   const baseStyles = 'rounded-md items-center justify-center';
 

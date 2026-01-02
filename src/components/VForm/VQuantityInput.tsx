@@ -7,8 +7,8 @@ import {
   type ViewProps,
   type ViewStyle,
 } from 'react-native';
-import tw from '../../utils/tw';
 import { Minus, Plus, Trash2 } from 'lucide-react-native';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VQuantityInputProps extends Omit<ViewProps, 'children'> {
   value?: number;
@@ -63,6 +63,7 @@ const VQuantityInput = forwardRef<View, VQuantityInputProps>(
     },
     ref
   ) => {
+    const { tw } = useTheme();
     const sizeConfig = sizeMap[size];
 
     const handleIncrement = () => {

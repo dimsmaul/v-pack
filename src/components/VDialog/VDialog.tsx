@@ -10,7 +10,7 @@ import {
   type ViewProps,
 } from 'react-native';
 import { X } from 'lucide-react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VDialogProps extends ViewProps {
   visible: boolean;
@@ -35,6 +35,7 @@ const VDialog: React.FC<VDialogProps> = ({
   style,
   ...props
 }) => {
+  const { tw } = useTheme();
   const [modalVisible, setModalVisible] = useState(false);
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleAnim = useRef(new Animated.Value(0.9)).current;

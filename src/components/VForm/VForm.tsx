@@ -8,7 +8,7 @@ import {
   type FieldValues,
   type UseFormReturn,
 } from 'react-hook-form';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 // Form Context
 interface FormContextValue<TFieldValues extends FieldValues> {
@@ -95,6 +95,7 @@ interface VFormItemProps extends ViewProps {
 }
 
 export function VFormItem({ children, style, ...props }: VFormItemProps) {
+  const { tw } = useTheme();
   return (
     <View style={[tw.style('mb-4'), style]} {...props}>
       {children}
@@ -109,6 +110,7 @@ interface VFormLabelProps {
 }
 
 export function VFormLabel({ children, style }: VFormLabelProps) {
+  const { tw } = useTheme();
   return (
     <Text style={[tw.style('text-sm font-medium text-gray-700 mb-1'), style]}>
       {children}
@@ -136,6 +138,7 @@ interface VFormDescriptionProps {
 }
 
 export function VFormDescription({ children, style }: VFormDescriptionProps) {
+  const { tw } = useTheme();
   return (
     <Text style={[tw.style('text-xs text-gray-500 mt-1'), style]}>
       {children}
@@ -149,6 +152,7 @@ interface VFormMessageProps {
 }
 
 export function VFormMessage({ style }: VFormMessageProps) {
+  const { tw } = useTheme();
   const { error } = useFormFieldContext();
 
   if (!error) return null;

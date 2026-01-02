@@ -6,8 +6,8 @@ import {
   type PressableProps,
   type ViewStyle,
 } from 'react-native';
-import tw from '../../utils/tw';
 import { Check } from 'lucide-react-native';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VCheckboxProps extends Omit<PressableProps, 'onPress'> {
   checked?: boolean;
@@ -50,6 +50,7 @@ const VCheckbox = forwardRef<View, VCheckboxProps>(
     },
     ref
   ) => {
+    const { tw } = useTheme();
     const boxSize = sizeMap[size];
     const iconSize = iconSizeMap[size];
     const radioInnerSize = radioInnerSizeMap[size];

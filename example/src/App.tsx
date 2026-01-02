@@ -4,7 +4,7 @@ import ExampleTabs from './example/tabs';
 import ExampleAccordion from './example/accordion';
 import ExampleButton from './example/button';
 import ExampleBanner from './example/banner';
-import { VSnackbarProvider } from 'v-pack';
+import { VPackProvider } from 'v-pack';
 import ExampleSnackbar from './example/snackbar';
 import ExampleDrawer from './example/drawer';
 import ExampleDialog from './example/dialog';
@@ -17,10 +17,12 @@ import ExampleTooltip from './example/tooltip';
 import ExampleCalendar from './example/calendar';
 import ExampleCalendarRange from './example/calendar-range';
 
+const theme = require('./../tailwind.config.js');
+
 export default function App() {
   useDeviceContext(tw);
   return (
-    <VSnackbarProvider>
+    <VPackProvider theme={theme}>
       <ScrollView style={tw`flex-1 bg-gray-100`}>
         <View
           style={tw`md:flex-row md:flex-wrap flex flex-col justify-center items-start pt-6`}
@@ -59,6 +61,6 @@ export default function App() {
         {/* Bottom spacing */}
         <View style={tw`h-10`} />
       </ScrollView>
-    </VSnackbarProvider>
+    </VPackProvider>
   );
 }

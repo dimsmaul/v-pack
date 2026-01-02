@@ -13,7 +13,7 @@ import {
   type GestureResponderEvent,
   //   type PanResponderGestureState,
 } from 'react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 export interface VSliderProps extends Omit<ViewProps, 'onLayout'> {
   value?: number;
@@ -40,6 +40,7 @@ const VSlider = forwardRef<View, VSliderProps>(
     },
     forwardedRef
   ) => {
+    const { tw } = useTheme();
     const [sliderWidth, setSliderWidth] = useState(0);
     const containerRef = useRef<View | null>(null);
     const trackRef = useRef<View | null>(null);

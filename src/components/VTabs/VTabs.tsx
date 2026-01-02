@@ -7,7 +7,7 @@ import {
   type ViewProps,
   type PressableProps,
 } from 'react-native';
-import tw from '../../utils/tw';
+import { useTheme } from '../../theme/ThemeProvider';
 
 // Context untuk share state
 interface TabsContextValue {
@@ -57,6 +57,7 @@ const VTabs: React.FC<VTabsProps> = ({
   variant = 'underline',
   ...props
 }) => {
+  const { tw } = useTheme();
   const contextValue: TabsContextValue = {
     value,
     onValueChange,
@@ -78,6 +79,7 @@ export const VTabsList: React.FC<VTabsListProps> = ({
   style,
   ...props
 }) => {
+  const { tw } = useTheme();
   const { variant } = useTabsContext();
 
   return (
@@ -105,6 +107,7 @@ export const VTabsTrigger: React.FC<VTabsTriggerProps> = ({
   disabled,
   ...props
 }) => {
+  const { tw } = useTheme();
   const { value, onValueChange, variant } = useTabsContext();
   const isActive = value === triggerValue;
 
@@ -180,6 +183,7 @@ export const VTabsContent: React.FC<VTabsContentProps> = ({
   style,
   ...props
 }) => {
+  const { tw } = useTheme();
   const { value } = useTabsContext();
 
   if (value !== contentValue) {

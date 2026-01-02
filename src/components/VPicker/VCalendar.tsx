@@ -4,8 +4,8 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import dayjs, { Dayjs } from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
 import 'dayjs/locale/id'; // optional: untuk bahasa Indonesia
-import tw from '../../utils/tw';
 import { ChevronLeft, ChevronRight } from 'lucide-react-native';
+import { useTheme } from '../../theme/ThemeProvider';
 
 dayjs.extend(localeData);
 dayjs.locale('id'); // optional: set ke bahasa Indonesia
@@ -25,6 +25,7 @@ const VCalendar: React.FC<VCalendarProps> = ({
   minDate,
   maxDate,
 }) => {
+  const { tw } = useTheme();
   const [currentDate, setCurrentDate] = useState<Dayjs>(
     dayjs(selectedDate || new Date())
   );
