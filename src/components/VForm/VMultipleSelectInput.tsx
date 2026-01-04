@@ -1,4 +1,4 @@
-// src/components/VMultipleSelectPickerInput/VMultipleSelectPickerInput.tsx
+// src/components/VMultipleSelectInput/VMultipleSelectInput.tsx
 import React, { useState } from 'react';
 import {
   TouchableOpacity,
@@ -20,7 +20,7 @@ export interface MultiSelectOption {
   description?: string;
 }
 
-export interface VMultipleSelectPickerInputProps {
+export interface VMultipleSelectInputProps {
   value?: (string | number)[];
   onChange?: (value: (string | number)[]) => void;
   options: MultiSelectOption[];
@@ -37,7 +37,7 @@ export interface VMultipleSelectPickerInputProps {
   selectAllOption?: boolean; // Add "Select All" option
 }
 
-const VMultipleSelectPickerInput: React.FC<VMultipleSelectPickerInputProps> = ({
+const VMultipleSelectInput: React.FC<VMultipleSelectInputProps> = ({
   value = [],
   onChange,
   options,
@@ -304,4 +304,4 @@ const VMultipleSelectPickerInput: React.FC<VMultipleSelectPickerInputProps> = ({
   );
 };
 
-export default VMultipleSelectPickerInput;
+export default VMultipleSelectInput;
