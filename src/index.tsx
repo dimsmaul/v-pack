@@ -147,6 +147,20 @@ export {
   type VAvatarGroupProps,
 } from './components/VAvatar/VGroupAvatar';
 
+// src/components/VSelectPickerInput/index.ts
+export {
+  default as VSelectInput,
+  type VSelectInputProps,
+  type SelectOption,
+} from './components/VForm/VSelectInput';
+
+// src/components/VMultipleSelectPickerInput/index.ts
+export {
+  default as VMultipleSelectInput,
+  type VMultipleSelectInputProps,
+  type MultiSelectOption,
+} from './components/VForm/VMultipleSelectInput';
+
 /**
  * Theme Provider
  */
