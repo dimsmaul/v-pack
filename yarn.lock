@@ -13052,6 +13052,15 @@ __metadata:
   peerDependencies:
     react: "*"
     react-native: "*"
+  peerDependenciesMeta:
+    "@hookform/resolvers":
+      optional: true
+    dayjs:
+      optional: true
+    react-hook-form:
+      optional: true
+    zod:
+      optional: true
   languageName: unknown
   linkType: soft
 

@@ -99,7 +99,7 @@
     },
     "react-hook-form": {
       "optional": true
-    }, 
+    },
     "zod": {
       "optional": true
     }
