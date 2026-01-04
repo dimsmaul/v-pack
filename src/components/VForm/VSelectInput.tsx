@@ -1,4 +1,4 @@
-// src/components/VSelectPickerInput/VSelectPickerInput.tsx
+// src/components/VSelectInput/VSelectInput.tsx
 import React, { useState } from 'react';
 import {
   TouchableOpacity,
@@ -20,7 +20,7 @@ export interface SelectOption {
   description?: string;
 }
 
-export interface VSelectPickerInputProps {
+export interface VSelectInputProps {
   value?: string | number | null;
   onChange?: (value: string | number | null) => void;
   options: SelectOption[];
@@ -35,7 +35,7 @@ export interface VSelectPickerInputProps {
   emptyMessage?: string;
 }
 
-const VSelectPickerInput: React.FC<VSelectPickerInputProps> = ({
+const VSelectInput: React.FC<VSelectInputProps> = ({
   value,
   onChange,
   options,
@@ -239,4 +239,4 @@ const VSelectPickerInput: React.FC<VSelectPickerInputProps> = ({
   );
 };
 
-export default VSelectPickerInput;
+export default VSelectInput;
