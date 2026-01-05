@@ -1,6 +1,6 @@
 # CLI.md
 
-# CLI Commands
+## CLI Commands
 
 V-Pack provides a CLI tool for initialization and configuration.
 
