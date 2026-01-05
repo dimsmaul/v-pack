@@ -130,7 +130,11 @@ const VBadge = forwardRef<View, VBadgeProps>(
     return (
       <View
         ref={ref as any}
-        style={[{ position: 'relative', alignSelf: 'flex-start' }, style]}
+        style={[
+          // eslint-disable-next-line react-native/no-inline-styles
+          { position: 'relative', alignSelf: 'flex-start' },
+          style,
+        ]}
         {...props}
       >
         {children}
