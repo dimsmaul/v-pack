@@ -72,7 +72,6 @@ export default function VSlider({
   const updateValueFromPosition = useCallback(
     (position: number) => {
       const newValue = getValueFromPosition(position);
-      console.log('Update value:', newValue, 'from position:', position);
       setInternalValue(newValue);
       onChange?.(newValue);
     },
