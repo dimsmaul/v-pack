@@ -57,7 +57,6 @@ export default function VCarousel<T = string>({
   const [carouselWidth, setCarouselWidth] = useState<number>(0);
   const onLayout = useCallback((event: LayoutChangeEvent) => {
     const { width } = event.nativeEvent.layout;
-    console.log('Carousel Width from onLayout:', width);
     setCarouselWidth(width);
   }, []);
 
