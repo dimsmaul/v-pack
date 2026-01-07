@@ -23,6 +23,7 @@ import ExampleSelectPicker from './example/select-picker';
 import ExampleMultipleSelectPicker from './example/multiple-select-picker';
 import ExampleCarousel from './example/carousel';
 import ExampleOtp from './example/otp';
+import ExampleRating from './example/rating';
 
 const theme = require('./../tailwind.config.js');
 
@@ -71,6 +72,7 @@ export default function App() {
             <ExampleSelectPicker />
             <ExampleMultipleSelectPicker />
             <ExampleOtp />
+            <ExampleRating />
           </View>
         </View>
 

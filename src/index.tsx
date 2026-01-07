@@ -119,6 +119,12 @@ export {
   type VOtpInputProps,
 } from './components/VOtpInput/VOtpInput';
 
+// Rating
+export {
+  default as VRating,
+  type VRatingProps,
+} from './components/VRating/VRating';
+
 // Tooltip
 export {
   default as VTooltip,

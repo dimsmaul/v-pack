@@ -113,7 +113,7 @@ const [error, setError] = useState(false);
   containerStyle={tw`gap-4 justify-center`}
 />
 ```
-### Props
+## Props
 | Prop              | Type                  | Default | Description                               |
 | ----------------- | --------------------- | ------- | ----------------------------------------- |
 | length            | number                | 6       | Number of input fields                    |
