@@ -1,188 +1,183 @@
-/**
- * FIXME: This component still can't run properly
- */
-
-// src/components/VSlider/VSlider.tsx
-import React, { forwardRef, useState, useRef, useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   View,
+  Text,
   PanResponder,
-  Animated,
-  type ViewProps,
-  type LayoutChangeEvent,
+  type ViewStyle,
   type GestureResponderEvent,
-  //   type PanResponderGestureState,
 } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 
-export interface VSliderProps extends Omit<ViewProps, 'onLayout'> {
-  value?: number;
-  onValueChange?: (value: number) => void;
+export type VSliderProps = {
   min?: number;
   max?: number;
   step?: number;
+  value?: number;
+  defaultValue?: number;
+  onChange?: (value: number) => void;
+  onChangeEnd?: (value: number) => void;
   disabled?: boolean;
-  variant?: 'primary' | 'secondary' | 'success' | 'danger';
-}
+  showValue?: boolean;
+  showMinMax?: boolean;
+  trackColor?: string;
+  activeTrackColor?: string;
+  thumbColor?: string;
+  containerStyle?: ViewStyle;
+};
 
-const VSlider = forwardRef<View, VSliderProps>(
-  (
-    {
-      value = 0,
-      onValueChange,
-      min = 0,
-      max = 100,
-      step = 1,
-      disabled = false,
-      variant = 'primary',
-      style,
-      ...props
+export default function VSlider({
+  min = 0,
+  max = 100,
+  step = 1,
+  value: controlledValue,
+  defaultValue = min,
+  onChange,
+  onChangeEnd,
+  disabled = false,
+  showValue = true,
+  showMinMax = false,
+  trackColor,
+  activeTrackColor,
+  thumbColor,
+  containerStyle,
+}: VSliderProps) {
+  const { tw } = useTheme();
+  const [sliderWidth, setSliderWidth] = useState(0);
+  const [internalValue, setInternalValue] = useState(defaultValue);
+
+  const value = controlledValue ?? internalValue;
+
+  // Calculate position from value
+  const getPositionFromValue = useCallback(
+    (val: number) => {
+      if (sliderWidth === 0) return 0;
+      const percentage = (val - min) / (max - min);
+      return percentage * sliderWidth;
     },
-    forwardedRef
-  ) => {
-    const { tw } = useTheme();
-    const [sliderWidth, setSliderWidth] = useState(0);
-    const containerRef = useRef<View | null>(null);
-    const trackRef = useRef<View | null>(null);
+    [min, max, sliderWidth]
+  );
 
-    // Track current value internally
-    const [currentValue, setCurrentValue] = useState(value);
+  // Calculate value from position
+  const getValueFromPosition = useCallback(
+    (position: number) => {
+      if (sliderWidth === 0) return min;
+      const percentage = Math.max(0, Math.min(1, position / sliderWidth));
+      const rawValue = min + percentage * (max - min);
+      const steppedValue = Math.round(rawValue / step) * step;
+      return Math.max(min, Math.min(max, steppedValue));
+    },
+    [min, max, step, sliderWidth]
+  );
 
-    // Thumb scale for touch feedback
-    const thumbScale = useRef(new Animated.Value(1)).current;
+  const updateValueFromPosition = useCallback(
+    (position: number) => {
+      const newValue = getValueFromPosition(position);
+      console.log('Update value:', newValue, 'from position:', position);
+      setInternalValue(newValue);
+      onChange?.(newValue);
+    },
+    [getValueFromPosition, onChange]
+  );
 
-    const normalizedValue = Math.max(min, Math.min(max, currentValue));
-    const percentage = ((normalizedValue - min) / (max - min)) * 100;
-
-    // Sync internal state with prop
-    React.useEffect(() => {
-      setCurrentValue(value);
-    }, [value]);
-
-    const updateValueFromLocation = useCallback(
-      (locationX: number) => {
-        if (sliderWidth === 0) return;
-
-        // Clamp locationX to slider bounds
-        const clampedX = Math.max(0, Math.min(sliderWidth, locationX));
-        const ratio = clampedX / sliderWidth;
-        const rawValue = min + ratio * (max - min);
-        const steppedValue = Math.round(rawValue / step) * step;
-        const newValue = Math.max(min, Math.min(max, steppedValue));
-
-        setCurrentValue(newValue);
-        onValueChange?.(newValue);
-      },
-      [sliderWidth, min, max, step, onValueChange]
-    );
-
-    const panResponder = useRef(
+  const panResponder = React.useMemo(
+    () =>
       PanResponder.create({
-        onStartShouldSetPanResponder: () => !disabled,
-        onMoveShouldSetPanResponder: () => !disabled,
-
+        onStartShouldSetPanResponder: () => {
+          return !disabled;
+        },
+        onMoveShouldSetPanResponder: () => {
+          return !disabled;
+        },
         onPanResponderGrant: (evt: GestureResponderEvent) => {
-          // Scale up thumb
-          Animated.spring(thumbScale, {
-            toValue: 1.3,
-            useNativeDriver: true,
-            speed: 20,
-            bounciness: 10,
-          }).start();
-
-          // Update value from touch location
-          updateValueFromLocation(evt.nativeEvent.locationX);
+          if (disabled || sliderWidth === 0) return;
+          const position = evt.nativeEvent.locationX;
+          updateValueFromPosition(position);
         },
-
         onPanResponderMove: (evt: GestureResponderEvent) => {
-          // Update value from current touch location
-          updateValueFromLocation(evt.nativeEvent.locationX);
+          if (disabled || sliderWidth === 0) return;
+          const position = evt.nativeEvent.locationX;
+          updateValueFromPosition(position);
         },
-
         onPanResponderRelease: () => {
-          Animated.spring(thumbScale, {
-            toValue: 1,
-            useNativeDriver: true,
-            speed: 20,
-            bounciness: 10,
-          }).start();
+          if (!disabled) {
+            onChangeEnd?.(value);
+          }
         },
+      }),
+    [disabled, sliderWidth, updateValueFromPosition, value, onChangeEnd]
+  );
 
-        onPanResponderTerminate: () => {
-          Animated.spring(thumbScale, {
-            toValue: 1,
-            useNativeDriver: true,
-            speed: 20,
-            bounciness: 10,
-          }).start();
-        },
-      })
-    ).current;
+  const thumbPosition = getPositionFromValue(value);
+  const activeTrackWidth = thumbPosition;
 
-    const handleLayout = useCallback((event: LayoutChangeEvent) => {
-      const { width } = event.nativeEvent.layout;
-      setSliderWidth(width);
-    }, []);
+  return (
+    <View style={[tw`w-full`, containerStyle]}>
+      {/* Value Display */}
+      {showValue && (
+        <View style={tw`flex-row justify-between items-center mb-2`}>
+          <Text style={tw`text-gray-700 font-semibold text-lg`}>
+            Value: {value}
+          </Text>
+        </View>
+      )}
 
-    const variantColors = {
-      primary: 'bg-primary-500',
-      secondary: 'bg-secondary-500',
-      success: 'bg-success-500',
-      danger: 'bg-danger-500',
-    };
-
-    const colorClass = disabled ? 'bg-gray-300' : variantColors[variant];
-
-    return (
+      {/* Slider Track */}
       <View
-        ref={(ref) => {
-          containerRef.current = ref as View | null;
-          if (typeof forwardedRef === 'function') {
-            forwardedRef(ref as View | null);
-          } else if (forwardedRef) {
-            (forwardedRef as React.MutableRefObject<View | null>).current =
-              ref as View | null;
+        style={tw.style(
+          `relative justify-center`,
+          { width: '100%', height: 40 },
+          disabled ? 'opacity-50' : ''
+        )}
+        onLayout={(event) => {
+          const { width } = event.nativeEvent.layout;
+          if (width > 0) {
+            setSliderWidth(width);
           }
         }}
-        style={[tw`w-full py-3`, style]}
-        {...props}
+        {...panResponder.panHandlers}
       >
+        {/* Background Track */}
         <View
-          ref={trackRef as any}
-          style={tw`relative h-2 rounded-full bg-gray-200`}
-          onLayout={handleLayout}
-          {...panResponder.panHandlers}
-        >
-          {/* Progress bar */}
-          <View
-            pointerEvents="none"
-            style={[
-              tw`absolute h-full rounded-full ${colorClass}`,
-              { width: `${percentage}%` },
-            ]}
-          />
+          style={tw.style(
+            `absolute h-2 rounded-full`,
+            { width: '100%' },
+            trackColor ? { backgroundColor: trackColor } : tw`bg-gray-300`
+          )}
+        />
 
-          {/* Thumb */}
-          <Animated.View
-            pointerEvents="none"
-            style={[
-              tw`absolute w-6 h-6 rounded-full shadow-lg border-2 border-white ${colorClass}`,
-              // eslint-disable-next-line react-native/no-inline-styles
-              {
-                top: '50%',
-                marginTop: -12,
-                left: `${percentage}%`,
-                marginLeft: -12,
-                transform: [{ scale: thumbScale }],
-              },
-            ]}
-          />
-        </View>
+        {/* Active Track */}
+        <View
+          style={tw.style(
+            `absolute h-2 rounded-full`,
+            { width: activeTrackWidth },
+            activeTrackColor
+              ? { backgroundColor: activeTrackColor }
+              : tw`bg-primary-500`
+          )}
+        />
+
+        {/* Thumb */}
+        <View
+          pointerEvents="none"
+          style={tw.style(
+            `absolute w-6 h-6 rounded-full shadow-lg`,
+            thumbColor
+              ? { backgroundColor: thumbColor }
+              : tw`bg-white border-2 border-primary-500`,
+            {
+              left: thumbPosition - 12,
+            }
+          )}
+        />
       </View>
-    );
-  }
-);
 
-VSlider.displayName = 'VSlider';
-
-export default VSlider;
+      {/* Min/Max Labels */}
+      {showMinMax && (
+        <View style={tw`flex-row justify-between mt-2`}>
+          <Text style={tw`text-gray-500 text-sm`}>{min}</Text>
+          <Text style={tw`text-gray-500 text-sm`}>{max}</Text>
+        </View>
+      )}
+    </View>
+  );
+}
