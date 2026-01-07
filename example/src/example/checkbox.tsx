@@ -6,7 +6,10 @@ const ExampleCheckbox: React.FC = () => {
   const { tw } = useTheme();
   const [checked, setChecked] = useState(false);
   const [toggled, setToggled] = useState(false);
-  const [sliderValue, setSliderValue] = useState(0);
+  const [volume, setVolume] = useState(50);
+
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1000000);
   return (
     <View
       style={tw`m-4 bg-white rounded-xl border border-gray-300 overflow-hidden`}
@@ -80,15 +83,60 @@ const ExampleCheckbox: React.FC = () => {
 
         {/* Slider */}
         <View>
-          <Text style={tw`mb-2 font-semibold`}>Slider: {sliderValue}</Text>
+          <Text style={tw`mb-2 font-semibold`}>Slider: {volume}</Text>
           <VSlider
-            value={sliderValue}
-            onValueChange={setSliderValue}
             min={0}
             max={100}
-            step={5}
-            variant="primary"
+            value={volume}
+            onChange={setVolume}
+            showMinMax
           />
+          <VSlider
+            min={0}
+            max={100}
+            value={volume}
+            onChange={setVolume}
+            showMinMax
+            disabled
+          />
+          <VSlider
+            min={0}
+            max={10}
+            step={1}
+            trackColor="#E5E7EB"
+            activeTrackColor="#10B981"
+            thumbColor="#10B981"
+            showValue
+            showMinMax
+          />
+
+          <View style={tw`p-4`}>
+            <Text style={tw`text-lg font-bold mb-4`}>Price Range</Text>
+
+            <Text style={tw`text-gray-600 mb-2`}>
+              Min: Rp {minPrice.toLocaleString()}
+            </Text>
+            <VSlider
+              min={0}
+              max={1000000}
+              step={50000}
+              value={minPrice}
+              onChange={setMinPrice}
+              showMinMax
+            />
+
+            <Text style={tw`text-gray-600 mb-2 mt-4`}>
+              Max: Rp {maxPrice.toLocaleString()}
+            </Text>
+            <VSlider
+              min={0}
+              max={1000000}
+              step={50000}
+              value={maxPrice}
+              onChange={setMaxPrice}
+              showMinMax
+            />
+          </View>
         </View>
       </View>
     </View>
