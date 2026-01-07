@@ -21,6 +21,7 @@ import ExampleCalendarInput from './example/calendar-input';
 import ExampleCalendarRangeInput from './example/calendar-range-input';
 import ExampleSelectPicker from './example/select-picker';
 import ExampleMultipleSelectPicker from './example/multiple-select-picker';
+import ExampleCarousel from './example/carousel';
 
 const theme = require('./../tailwind.config.js');
 
@@ -43,6 +44,8 @@ export default function App() {
             <ExampleCheckbox />
             <ExampleCalendar />
             <ExampleCalendarRange />
+
+            <ExampleCarousel />
           </View>
           <View style={tw`md:w-1/2 w-full`}>
             {/* Accordion Section */}
