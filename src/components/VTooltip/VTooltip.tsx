@@ -1,249 +1,319 @@
-/**
- * FIXME: This component still can't run properly
- */
-
-// src/components/VTooltip/VTooltip.tsx
-import React, { forwardRef, useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import {
   View,
   Text,
-  Pressable,
+  TouchableOpacity,
   Modal,
-  type ViewProps,
   type ViewStyle,
   type LayoutChangeEvent,
+  TouchableWithoutFeedback,
   StyleSheet,
   Dimensions,
+  findNodeHandle,
+  UIManager,
 } from 'react-native';
 import { useTheme } from '../../theme/ThemeProvider';
 
-export interface VTooltipProps extends Omit<ViewProps, 'children'> {
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+
+export type VTooltipProps = {
+  content: string | React.ReactNode;
   children: React.ReactNode;
-  content: string;
   placement?: 'top' | 'bottom' | 'left' | 'right';
-  variant?: 'dark' | 'light';
-  disabled?: boolean;
-  triggerMode?: 'press' | 'longPress';
-}
+  backgroundColor?: string;
+  textColor?: string;
+  withArrow?: boolean;
+  onOpen?: () => void;
+  onClose?: () => void;
+  containerStyle?: ViewStyle;
+  contentStyle?: ViewStyle;
+};
 
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+export default function VTooltip({
+  content,
+  children,
+  placement = 'top',
+  backgroundColor,
+  textColor,
+  withArrow = true,
+  onOpen,
+  onClose,
+  containerStyle,
+  contentStyle,
+}: VTooltipProps) {
+  const { tw } = useTheme();
+  const [visible, setVisible] = useState(false);
+  const [triggerLayout, setTriggerLayout] = useState({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
+  const [tooltipSize, setTooltipSize] = useState({ width: 0, height: 0 });
+  const triggerRef = useRef<View>(null);
 
-const VTooltip = forwardRef<View, VTooltipProps>(
-  (
-    {
-      children,
-      content,
-      placement = 'top',
-      variant = 'dark',
-      disabled = false,
-      triggerMode = 'longPress',
-      style,
-      ...props
-    },
-    ref
-  ) => {
-    const { tw } = useTheme();
-    const [visible, setVisible] = useState(false);
-    const [triggerLayout, setTriggerLayout] = useState({
-      x: 0,
-      y: 0,
-      width: 0,
-      height: 0,
-    });
-    const [tooltipSize, setTooltipSize] = useState({ width: 0, height: 0 });
-    const triggerRef = useRef<View | null>(null);
-
-    const showTooltip = () => {
-      if (disabled || !triggerRef.current) return;
-
-      // Cast to any to access measureInWindow
-      (triggerRef.current as any).measureInWindow?.(
-        (x: number, y: number, width: number, height: number) => {
+  const handleOpen = useCallback(() => {
+    if (triggerRef.current) {
+      const nodeHandle = findNodeHandle(triggerRef.current);
+      if (nodeHandle != null) {
+        UIManager.measureInWindow(nodeHandle, (x, y, width, height) => {
           setTriggerLayout({ x, y, width, height });
           setVisible(true);
+          onOpen?.();
+        });
+      }
+    }
+  }, [onOpen]);
+
+  const handleClose = useCallback(() => {
+    setVisible(false);
+    onClose?.();
+  }, [onClose]);
+
+  const getTooltipPosition = useCallback(() => {
+    const arrowSize = withArrow ? 8 : 0;
+    const spacing = 8;
+    const padding = 16;
+
+    let top = 0;
+    let left = 0;
+    let width: number | undefined;
+
+    switch (placement) {
+      case 'top':
+      case 'bottom': {
+        // Vertical placement
+        top =
+          placement === 'top'
+            ? triggerLayout.y - tooltipSize.height - arrowSize - spacing
+            : triggerLayout.y + triggerLayout.height + arrowSize + spacing;
+
+        // Mulai dari edge kiri, full width
+        left = padding;
+        width = SCREEN_WIDTH - padding * 2;
+
+        // Adjust vertical jika keluar atas/bawah
+        if (top < padding) {
+          top = padding;
         }
-      );
-    };
-
-    const hideTooltip = () => {
-      setVisible(false);
-    };
-
-    const handleTooltipLayout = (event: LayoutChangeEvent) => {
-      const { width, height } = event.nativeEvent.layout;
-      setTooltipSize({ width, height });
-    };
-
-    const getTooltipPosition = (): ViewStyle => {
-      const arrowSize = 8;
-      const offset = 8;
-      let top = 0;
-      let left = 0;
-
-      switch (placement) {
-        case 'top':
-          top = triggerLayout.y - tooltipSize.height - arrowSize - offset;
-          left =
-            triggerLayout.x + triggerLayout.width / 2 - tooltipSize.width / 2;
-          break;
-        case 'bottom':
-          top = triggerLayout.y + triggerLayout.height + arrowSize + offset;
-          left =
-            triggerLayout.x + triggerLayout.width / 2 - tooltipSize.width / 2;
-          break;
-        case 'left':
-          top =
-            triggerLayout.y + triggerLayout.height / 2 - tooltipSize.height / 2;
-          left = triggerLayout.x - tooltipSize.width - arrowSize - offset;
-          break;
-        case 'right':
-          top =
-            triggerLayout.y + triggerLayout.height / 2 - tooltipSize.height / 2;
-          left = triggerLayout.x + triggerLayout.width + arrowSize + offset;
-          break;
+        if (top + tooltipSize.height > SCREEN_HEIGHT - padding) {
+          top = SCREEN_HEIGHT - padding - tooltipSize.height;
+        }
+        break;
       }
 
-      // Clamp to screen bounds
-      left = Math.max(8, Math.min(screenWidth - tooltipSize.width - 8, left));
-      top = Math.max(8, Math.min(screenHeight - tooltipSize.height - 8, top));
+      case 'left': {
+        top =
+          triggerLayout.y + triggerLayout.height / 2 - tooltipSize.height / 2;
+        left = padding;
+        width = triggerLayout.x - arrowSize - spacing - padding;
 
-      return { top, left };
-    };
-
-    const getArrowStyle = (): ViewStyle => {
-      const arrowSize = 8;
-
-      const arrowColor =
-        variant === 'dark' ? tw.color('gray-800') : tw.color('white');
-
-      switch (placement) {
-        case 'top':
-          return {
-            position: 'absolute',
-            bottom: -arrowSize,
-            left: tooltipSize.width / 2 - arrowSize,
-            width: 0,
-            height: 0,
-            backgroundColor: 'transparent',
-            borderStyle: 'solid',
-            borderLeftWidth: arrowSize,
-            borderRightWidth: arrowSize,
-            borderTopWidth: arrowSize,
-            borderLeftColor: 'transparent',
-            borderRightColor: 'transparent',
-            borderTopColor: arrowColor,
-          };
-        case 'bottom':
-          return {
-            position: 'absolute',
-            top: -arrowSize,
-            left: tooltipSize.width / 2 - arrowSize,
-            width: 0,
-            height: 0,
-            backgroundColor: 'transparent',
-            borderStyle: 'solid',
-            borderLeftWidth: arrowSize,
-            borderRightWidth: arrowSize,
-            borderBottomWidth: arrowSize,
-            borderLeftColor: 'transparent',
-            borderRightColor: 'transparent',
-            borderBottomColor: arrowColor,
-          };
-        case 'left':
-          return {
-            position: 'absolute',
-            right: -arrowSize,
-            top: tooltipSize.height / 2 - arrowSize,
-            width: 0,
-            height: 0,
-            backgroundColor: 'transparent',
-            borderStyle: 'solid',
-            borderTopWidth: arrowSize,
-            borderBottomWidth: arrowSize,
-            borderLeftWidth: arrowSize,
-            borderTopColor: 'transparent',
-            borderBottomColor: 'transparent',
-            borderLeftColor: arrowColor,
-          };
-        case 'right':
-          return {
-            position: 'absolute',
-            left: -arrowSize,
-            top: tooltipSize.height / 2 - arrowSize,
-            width: 0,
-            height: 0,
-            backgroundColor: 'transparent',
-            borderStyle: 'solid',
-            borderTopWidth: arrowSize,
-            borderBottomWidth: arrowSize,
-            borderRightWidth: arrowSize,
-            borderTopColor: 'transparent',
-            borderBottomColor: 'transparent',
-            borderRightColor: arrowColor,
-          };
-        default:
-          return {};
+        if (top < padding) {
+          top = padding;
+        }
+        if (top + tooltipSize.height > SCREEN_HEIGHT - padding) {
+          top = SCREEN_HEIGHT - padding - tooltipSize.height;
+        }
+        break;
       }
+
+      case 'right': {
+        top =
+          triggerLayout.y + triggerLayout.height / 2 - tooltipSize.height / 2;
+        left = triggerLayout.x + triggerLayout.width + arrowSize + spacing;
+        width = SCREEN_WIDTH - left - padding;
+
+        if (top < padding) {
+          top = padding;
+        }
+        if (top + tooltipSize.height > SCREEN_HEIGHT - padding) {
+          top = SCREEN_HEIGHT - padding - tooltipSize.height;
+        }
+        break;
+      }
+    }
+
+    return { top, left, width };
+  }, [placement, triggerLayout, tooltipSize, withArrow]);
+
+  const getArrowStyle = useCallback(() => {
+    const arrowSize = 8;
+    const baseStyle: ViewStyle = {
+      position: 'absolute',
+      width: 0,
+      height: 0,
+      backgroundColor: 'transparent',
+      borderStyle: 'solid',
     };
 
-    const isDark = variant === 'dark';
+    const bgColor = backgroundColor || '#0008';
+    const tooltipPos = getTooltipPosition();
 
-    return (
-      // eslint-disable-next-line react-native/no-inline-styles
-      <View
-        ref={ref as any}
-        // eslint-disable-next-line react-native/no-inline-styles
-        style={[{ alignSelf: 'flex-start' }, style]}
-        {...props}
+    switch (placement) {
+      case 'top': {
+        // Arrow horizontal position mengikuti trigger, bukan center tooltip
+        const arrowLeft =
+          triggerLayout.x +
+          triggerLayout.width / 2 -
+          tooltipPos.left -
+          arrowSize;
+        return {
+          ...baseStyle,
+          bottom: -arrowSize,
+          left: Math.max(
+            arrowSize,
+            Math.min(tooltipSize.width - arrowSize * 2, arrowLeft)
+          ),
+          borderLeftWidth: arrowSize,
+          borderRightWidth: arrowSize,
+          borderTopWidth: arrowSize,
+          borderLeftColor: 'transparent',
+          borderRightColor: 'transparent',
+          borderTopColor: bgColor,
+        };
+      }
+
+      case 'bottom': {
+        const arrowLeft =
+          triggerLayout.x +
+          triggerLayout.width / 2 -
+          tooltipPos.left -
+          arrowSize;
+        return {
+          ...baseStyle,
+          top: -arrowSize,
+          left: Math.max(
+            arrowSize,
+            Math.min(tooltipSize.width - arrowSize * 2, arrowLeft)
+          ),
+          borderLeftWidth: arrowSize,
+          borderRightWidth: arrowSize,
+          borderBottomWidth: arrowSize,
+          borderLeftColor: 'transparent',
+          borderRightColor: 'transparent',
+          borderBottomColor: bgColor,
+        };
+      }
+
+      case 'left': {
+        // Arrow vertical position mengikuti trigger
+        const arrowTop =
+          triggerLayout.y +
+          triggerLayout.height / 2 -
+          tooltipPos.top -
+          arrowSize;
+        return {
+          ...baseStyle,
+          right: -arrowSize,
+          top: Math.max(
+            arrowSize,
+            Math.min(tooltipSize.height - arrowSize * 2, arrowTop)
+          ),
+          borderTopWidth: arrowSize,
+          borderBottomWidth: arrowSize,
+          borderLeftWidth: arrowSize,
+          borderTopColor: 'transparent',
+          borderBottomColor: 'transparent',
+          borderLeftColor: bgColor,
+        };
+      }
+
+      case 'right': {
+        const arrowTop =
+          triggerLayout.y +
+          triggerLayout.height / 2 -
+          tooltipPos.top -
+          arrowSize;
+        return {
+          ...baseStyle,
+          left: -arrowSize,
+          top: Math.max(
+            arrowSize,
+            Math.min(tooltipSize.height - arrowSize * 2, arrowTop)
+          ),
+          borderTopWidth: arrowSize,
+          borderBottomWidth: arrowSize,
+          borderRightWidth: arrowSize,
+          borderTopColor: 'transparent',
+          borderBottomColor: 'transparent',
+          borderRightColor: bgColor,
+        };
+      }
+
+      default:
+        return baseStyle;
+    }
+  }, [
+    placement,
+    tooltipSize,
+    backgroundColor,
+    triggerLayout,
+    getTooltipPosition,
+  ]);
+
+  const tooltipPosition = getTooltipPosition();
+
+  return (
+    <>
+      <View ref={triggerRef as any} style={containerStyle}>
+        <TouchableOpacity onPress={handleOpen} activeOpacity={0.7}>
+          {children}
+        </TouchableOpacity>
+      </View>
+
+      <Modal
+        visible={visible}
+        transparent
+        animationType="fade"
+        onRequestClose={handleClose}
+        statusBarTranslucent
       >
-        <View ref={triggerRef as any} collapsable={false}>
-          <Pressable
-            onPress={triggerMode === 'press' ? showTooltip : undefined}
-            onLongPress={triggerMode === 'longPress' ? showTooltip : undefined}
-            onPressOut={hideTooltip}
-          >
-            {children}
-          </Pressable>
-        </View>
-
-        <Modal
-          visible={visible}
-          transparent
-          animationType="fade"
-          onRequestClose={hideTooltip}
-          statusBarTranslucent
-        >
-          <Pressable style={StyleSheet.absoluteFill} onPress={hideTooltip}>
+        <TouchableWithoutFeedback onPress={handleClose}>
+          <View style={styles.overlay}>
             <View
               style={[
-                tw.style(
-                  'absolute rounded-lg px-3 py-2 shadow-lg',
-                  isDark ? 'bg-gray-800' : 'bg-white border border-gray-200'
-                ),
-                getTooltipPosition(),
-                // eslint-disable-next-line react-native/no-inline-styles
-                { maxWidth: 300 },
+                tw`absolute rounded-lg px-3 py-2 shadow-lg`,
+                {
+                  top: tooltipPosition.top,
+                  left: tooltipPosition.left,
+                  width: tooltipPosition.width,
+                },
+                backgroundColor ? { backgroundColor } : tw`bg-gray-700`,
+                contentStyle,
               ]}
-              onLayout={handleTooltipLayout}
-              pointerEvents="none"
+              onLayout={(event: LayoutChangeEvent) => {
+                const { width, height } = event.nativeEvent.layout;
+                if (tooltipSize.width === 0 || tooltipSize.height === 0) {
+                  setTooltipSize({ width, height });
+                }
+              }}
             >
-              <Text
-                style={tw.style(
-                  'text-sm',
-                  isDark ? 'text-white' : 'text-gray-900'
-                )}
-              >
-                {content}
-              </Text>
-              <View style={getArrowStyle()} />
+              {typeof content === 'string' ? (
+                <Text
+                  style={[
+                    tw`text-sm`,
+                    textColor ? { color: textColor } : tw`text-white`,
+                  ]}
+                >
+                  {content}
+                </Text>
+              ) : (
+                content
+              )}
+
+              {withArrow && tooltipSize.width > 0 && (
+                <View style={getArrowStyle()} />
+              )}
             </View>
-          </Pressable>
-        </Modal>
-      </View>
-    );
-  }
-);
+          </View>
+        </TouchableWithoutFeedback>
+      </Modal>
+    </>
+  );
+}
 
-VTooltip.displayName = 'VTooltip';
-
-export default VTooltip;
+const styles = StyleSheet.create({
+  overlay: {
+    flex: 1,
+  },
+});
