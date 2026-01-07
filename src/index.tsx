@@ -113,6 +113,12 @@ export {
   type VBadgeProps,
 } from './components/VBadge/VBadge';
 
+// OTP Input
+export {
+  default as VOtpInput,
+  type VOtpInputProps,
+} from './components/VOtpInput/VOtpInput';
+
 // Tooltip
 export {
   default as VTooltip,

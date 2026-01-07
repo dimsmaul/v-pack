@@ -22,6 +22,7 @@ import ExampleCalendarRangeInput from './example/calendar-range-input';
 import ExampleSelectPicker from './example/select-picker';
 import ExampleMultipleSelectPicker from './example/multiple-select-picker';
 import ExampleCarousel from './example/carousel';
+import ExampleOtp from './example/otp';
 
 const theme = require('./../tailwind.config.js');
 
@@ -69,6 +70,7 @@ export default function App() {
 
             <ExampleSelectPicker />
             <ExampleMultipleSelectPicker />
+            <ExampleOtp />
           </View>
         </View>
 
