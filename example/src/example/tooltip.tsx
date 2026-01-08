@@ -24,7 +24,6 @@ const ExampleTooltip: React.FC = () => {
         <VTooltip
           content="A tooltip displays when the cursor hovers over an icon, image, hyperlink, or other element in a graphical user interface."
           placement="bottom"
-          variant="light"
         >
           <Text>Tooltips</Text>
         </VTooltip>
@@ -37,7 +36,6 @@ const ExampleTooltip: React.FC = () => {
         <VTooltip
           content="A tooltip displays when the cursor hovers over an icon, image, hyperlink, or other element in a graphical user interface."
           placement="right"
-          triggerMode="press"
         >
           <Text>Tooltips</Text>
         </VTooltip>
