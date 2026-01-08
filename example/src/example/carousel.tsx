@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { useTheme, VCarousel } from 'v-pack';
+import { useTheme, VBanner, VCarousel } from 'v-pack';
 
 type Product = {
   id: number;
@@ -48,26 +48,37 @@ const ExampleCarousel: React.FC = () => {
         Carousel
       </Text>
       <View style={tw`p-4 flex flex-row flex-wrap gap-6`}>
-        <VCarousel items={images} />
-        <VCarousel items={images} showArrows />
-        <Text>With Text</Text>
-        <VCarousel
-          items={products}
-          imageKey="thumbnail"
-          itemHeight={250}
-          autoPlay
-          interval={4000}
-          renderItem={({ item }) => (
-            <View style={tw`flex-1 rounded-lg overflow-hidden`}>
-              <View style={tw`p-4`}>
-                <Text style={tw`text-lg font-semibold mb-2`}>{item.name}</Text>
-                <Text style={tw`text-blue-600 font-bold text-xl`}>
-                  Rp {item.price.toLocaleString('id-ID')}
-                </Text>
-              </View>
-            </View>
-          )}
+        {/* TODO: now only support native */}
+        <VBanner
+          type="danger"
+          title="Component Not Supported on Web"
+          message="This component is not supported on web platform. Please try it on mobile device."
+          style={tw`mb-3 w-full ios:hidden android:hidden`}
         />
+        <View style={tw`flex gap-5 flex-col web:hidden`}>
+          <VCarousel items={images} />
+          <VCarousel items={images} showArrows />
+          <Text>With Text</Text>
+          <VCarousel
+            items={products}
+            imageKey="thumbnail"
+            itemHeight={250}
+            autoPlay
+            interval={4000}
+            renderItem={({ item }) => (
+              <View style={tw`flex-1 rounded-lg overflow-hidden`}>
+                <View style={tw`p-4`}>
+                  <Text style={tw`text-lg font-semibold mb-2`}>
+                    {item.name}
+                  </Text>
+                  <Text style={tw`text-blue-600 font-bold text-xl`}>
+                    Rp {item.price.toLocaleString('id-ID')}
+                  </Text>
+                </View>
+              </View>
+            )}
+          />
+        </View>
       </View>
     </View>
   );
