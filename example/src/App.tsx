@@ -24,6 +24,7 @@ import ExampleMultipleSelectPicker from './example/multiple-select-picker';
 import ExampleCarousel from './example/carousel';
 import ExampleOtp from './example/otp';
 import ExampleRating from './example/rating';
+import ExampleStepper from './example/stepper';
 
 const theme = require('./../tailwind.config.js');
 
@@ -48,6 +49,7 @@ export default function App() {
             <ExampleCalendarRange />
 
             <ExampleCarousel />
+            <ExampleStepper />
           </View>
           <View style={tw`md:w-1/2 w-full`}>
             {/* Accordion Section */}

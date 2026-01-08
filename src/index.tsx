@@ -125,6 +125,13 @@ export {
   type VRatingProps,
 } from './components/VRating/VRating';
 
+// Stepper
+export {
+  default as VStepper,
+  type VStepperProps,
+  type VStepperStep,
+} from './components/VStepper/VStepper';
+
 // Tooltip
 export {
   default as VTooltip,
