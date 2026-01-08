@@ -1,3 +1,5 @@
+import { plugin } from 'twrnc';
+
 // tailwind.config.js
 module.exports = {
   theme: {
@@ -111,4 +113,21 @@ module.exports = {
       },
     },
   },
+  plugins: [
+    // add variant for ios: android: web:
+    plugin(function ({ addUtilities }) {
+      const newUtilities = {
+        '.ios\\:': {
+          '@media (platform: ios)': {},
+        },
+        '.android\\:': {
+          '@media (platform: android)': {},
+        },
+        '.web\\:': {
+          '@media (platform: web)': {},
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    }),
+  ],
 };
